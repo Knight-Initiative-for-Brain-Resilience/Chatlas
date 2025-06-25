@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      OPENAI_API_KEY: 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
+
+  kg_rag:
+    build:
+      context: ../KG_RAG
+      dockerfile: Dockerfile.flask
+    ports:
+      - "5005:5005"
+    environment:
+      - FLASK_APP=api.py
